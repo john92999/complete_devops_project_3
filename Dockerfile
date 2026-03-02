@@ -1,12 +1,12 @@
-FROM maven:3.8.6-openjdk-11 AS build
+FROM node:16 AS build
 WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
-COPY src ./src
-RUN mvn clean package -DskipTests
+RUN git clone https://github.com/pelthepu/todo-ui.git .
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+RUN npm install --legacy-peer-deps --no-audit --no-fund
+RUN npm run build
 
-FROM openjdk:11-jre-slim
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
