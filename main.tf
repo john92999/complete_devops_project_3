@@ -74,6 +74,23 @@ resource "aws_instance" "public_ec2" {
     associate_public_ip_address = true
     key_name                    = var.key_name
 
+    connection {
+        type        = "ssh"
+        user        = "ubuntu"
+        private_key = file(var.private_key_path)
+        host        = self.public_ip
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "sudo apt update -y",
+            "sudo apt install software-properties-common -y",
+            "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+            "sudo apt update -y",
+            "sudo apt install ansible -y"
+        ]
+    }
+
     tags = {
         Name = "public-ec2"
     }

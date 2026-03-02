@@ -16,3 +16,4 @@ vpc_subnet = {
 ami_id        = "ami-0f58b397bc5c1f2e8"  # Amazon Linux 2 ap-south-1 — replace if needed
 instance_type = "t2.micro"
 key_name      = "your-key-pair-name"      # Replace with your actual key pair name
+private_key_path = "C:/Users/MSI/Downloads/demoapp.pem"

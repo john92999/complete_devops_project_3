@@ -27,3 +27,8 @@ variable "key_name" {
     description = "Name of the existing EC2 key pair for SSH"
     type        = string
 }
+
+variable "private_key_path" {
+    description = "Path to the private key file for SSH"
+    type        = string
+}
