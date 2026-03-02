@@ -1,0 +1,7 @@
+- name: Install required dependencies in the servers
+  hosts: all
+  vars_files:
+    - variables.yaml
+  roles:
+    - role: common
+      become: yes

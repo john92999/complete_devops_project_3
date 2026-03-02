@@ -1,3 +1,14 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for common
+
+- name: Install JDK 21 AND 11
+  ansible.builtin.apt:
+    name: "{{ java_package }}"
+    state: present
+    update_cache: yes
+
+- name: Install Required Packages
+  ansible.builtin.apt:
+    name: "{{ localhost_variables if inventory_hostname == 'localhost' else anotherhost_variables }}"
+    state: present

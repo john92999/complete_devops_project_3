@@ -1,3 +1,13 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for common
+localhost_variables:
+  - git
+  - nodejs
+  - npm
+  - python3
+
+anotherhost_variables:
+  - maven
+  - git
+  - python3
