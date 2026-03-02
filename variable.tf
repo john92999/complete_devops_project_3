@@ -1,22 +1,29 @@
 variable "vpc_cidr" {
     description = "value of VPC getting created"
-    type = string
+    type        = string
 }
 
 variable "vpc_subnet" {
     description = "List of subnets"
     type = map(object({
-        subnet_cidr_block = string
+        subnet_cidr_block        = string
         subnet_availability_zone = string
-        subnet_names = string
-}))
+        subnet_names             = string
+    }))
 }
 
-variable "security_group_rules" {
-    description = "Rules given to security group"
-    type =  map(object({
-        security_group_from_port = list[string]
-        security_group_to_port = string
-        protocol = string    
-    }))   
+variable "ami_id" {
+    description = "AMI ID for EC2 instances"
+    type        = string
+}
+
+variable "instance_type" {
+    description = "EC2 instance type"
+    type        = string
+    default     = "t2.micro"
+}
+
+variable "key_name" {
+    description = "Name of the existing EC2 key pair for SSH"
+    type        = string
 }
