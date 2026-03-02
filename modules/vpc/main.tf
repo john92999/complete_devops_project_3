@@ -33,3 +33,12 @@ resource "aws_nat_gateway" "main_nat"{
       Name = "Main-nat"
     }
 }
+
+resource "aws_security_group" "security_rules" {
+    for_each = var.security_rules
+    ingress = {
+        from_port = each.value.security_group_from_port
+        to_port = each.value.security_group_to_port
+        protocol = each.value.security_group_protocol
+    }
+}

@@ -2,6 +2,7 @@ module "vpc" {
     source = "./modules/vpc"
     vpc_cidr = var.vpc_cidr
     subnet = var.vpc_subnet
+    security_rules = var.security_group_rules
 }
 
 resource "aws_s3_bucket" "main_terraform_statefile" {
@@ -14,4 +15,3 @@ resource "aws_s3_bucket_versioning" "version_main_terraform_statefile" {
       status = "Enabled"
     }
 }
-

@@ -11,3 +11,8 @@ vpc_subnet = {
     subnet_names = "private_subnet"
   }
 }
+security_group_rules{
+    "rules" = {
+        
+    }
+}

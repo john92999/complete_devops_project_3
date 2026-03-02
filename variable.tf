@@ -11,3 +11,12 @@ variable "vpc_subnet" {
         subnet_names = string
 }))
 }
+
+variable "security_group_rules" {
+    description = "Rules given to security group"
+    type =  map(object({
+        security_group_from_port = list[string]
+        security_group_to_port = string
+        protocol = string    
+    }))   
+}
