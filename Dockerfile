@@ -1,5 +1,6 @@
 FROM node:16-alpine AS build
 WORKDIR /app
+RUN apk add --no-cache git
 RUN git clone https://github.com/pelthepu/todo-ui.git .
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
