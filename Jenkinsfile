@@ -34,7 +34,7 @@ pipeline{
 
         stage('Npm install'){
             steps{
-                sh 'npm install'
+                sh 'npm install --legacy-peer-deps --prefer-offline --no-audit --no-fund'
             }
         }
     }
