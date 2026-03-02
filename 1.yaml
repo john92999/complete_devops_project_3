@@ -1,6 +1,8 @@
 - name: Install required dependencies in the servers
   become: yes
   hosts: all
+  vars_files:
+    - - variables.yaml
   tasks:
     - name: Install JDK 21 AND 11
       ansible.builtin.apt:
