@@ -1,2 +1,2 @@
-localhost java-package=opendk-21-jdk
-10.82.17.17 java-package=openjdk-11-jdk
+localhost ansible_connection=local java_package=openjdk-21-jdk
+10.82.17.17 java_package=openjdk-11-jdk
