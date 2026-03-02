@@ -11,8 +11,3 @@ variable "vpc_subnet" {
         subnet_names = string
 }))
 }
-
-variable "private_subnet" {
-    description = "Type of private subnet"
-    type = string
-}
