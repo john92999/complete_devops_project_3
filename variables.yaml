@@ -1,0 +1,10 @@
+localhost_variables:
+  - git
+  - nodejs
+  - npm
+  - python3
+
+anotherhost_variables:
+  - maven
+  - git
+  - python3

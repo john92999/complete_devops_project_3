@@ -1,8 +1,13 @@
 - name: Install required dependencies in the servers
   become: yes
-  hots: all
+  hosts: all
   tasks:
     - name: Install JDK 21 AND 11
       ansible.builtin.apt:
-        name: openjdk-21-jdk
+        name: "{{ java_package }}"
+        state: present
+        update_cache: yes
+    - name: Install Required Packages
+      ansible.builtin.apt:
+        name: "{{ localhost_variables if inventory_hostname == 'localhost' else anotherhost_variables }}"
         state: present
