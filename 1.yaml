@@ -1,0 +1,8 @@
+- name: Install required dependencies in the servers
+  become: yes
+  hots: all
+  tasks:
+    - name: Install JDK 21 AND 11
+      ansible.builtin.apt:
+        name: openjdk-21-jdk
+        state: present
