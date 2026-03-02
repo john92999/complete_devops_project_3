@@ -9,6 +9,7 @@
         name: "{{ java_package }}"
         state: present
         update_cache: yes
+      ignore_errors: yes
     - name: Install Required Packages
       ansible.builtin.apt:
         name: "{{ localhost_variables if inventory_hostname == 'localhost' else anotherhost_variables }}"
