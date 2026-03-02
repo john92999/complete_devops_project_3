@@ -1,0 +1,34 @@
+pipeline{
+    agent {label 'JDK11'}
+
+    tools {
+        jdk 'jdk11'
+    }
+
+    stages {
+
+        stage('Check Java Version') {
+            steps {
+                sh 'java -version'
+            }
+        }
+
+        stage('Source Code'){
+            steps{
+                git url: 'https://github.com/pelthepu/todo-api.git'
+            }
+        }
+
+        stage('Run Spring Boot'){
+            steps{
+                sh 'mvn clean spring-boot:run'
+            }
+        }
+    }
+
+    post{
+        success {
+            build job: 'todo-ui-pipeline', wait: false
+        }
+    }
+}
