@@ -8,13 +8,6 @@ pipeline{
     }
 
     stages{
-
-        stage('Run ansible'){
-            steps{
-                ansible_playbook_init()
-            }
-        }
-
         stage('Source code'){
             steps{
                 git url: 'https://github.com/pelthepu/todo-ui.git'
