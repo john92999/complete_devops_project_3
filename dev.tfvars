@@ -12,21 +12,7 @@ vpc_subnet = {
   }
 }
 security_group_rules{
-    "ssh" = {
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-    }
-    "http" = {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-    }
-    "app" = {
-        from_port = 8080
-        to_port = 8080
-        protocol = "tcp"
+    "rules" = {
+        
     }
 }
-
-key_name = "demoapp"

@@ -16,8 +16,8 @@ variable "subnet" {
 variable "security_rules" {
     description = "Type of security rules to be associated to security group"
     type = map(object({
-      security_group_from_port = number
-      security_group_to_port = number
+      security_group_from_port = list[string]
+      security_group_to_port = string
       protocol = string
     }))
 }
