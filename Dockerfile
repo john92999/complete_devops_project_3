@@ -1,13 +1,35 @@
-FROM node:16-alpine AS build
-WORKDIR /app
-RUN apk add --no-cache git
-RUN git clone https://github.com/pelthepu/todo-ui.git .
-ARG REACT_APP_API_URL
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
-RUN npm install --legacy-peer-deps --no-audit --no-fund
-RUN npm run build
+# ---------- Stage 1: Build ----------
+FROM maven:3.9.6-eclipse-temurin-11-alpine AS build
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+# Install git only
+RUN apk add --no-cache git
+
+# Clone repository
+RUN git clone https://github.com/pelthepu/todo-api.git .
+
+# Build jar
+RUN mvn clean package -DskipTests
+
+
+# ---------- Stage 2: Runtime ----------
+FROM eclipse-temurin:11-jre-alpine
+
+# Install MongoDB (light Alpine version)
+RUN apk add --no-cache mongodb
+
+WORKDIR /app
+
+# Copy jar from build stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Create Mongo DB directory
+RUN mkdir -p /data/db
+
+EXPOSE 8080 27017
+
+# Start Mongo + Spring Boot
+CMD mongod --fork --logpath /var/log/mongod.log --dbpath /data/db && \
+    java -Dspring.data.mongodb.uri=mongodb://localhost:27017/tododb \
+    -jar app.jar
